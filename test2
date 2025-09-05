@@ -1,1 +1,22 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+
+public class testcas2 {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		WebDriver d=new ChromeDriver();
+		d.get("https://www.saucedemo.com/");
+		d.findElement(By.id("user-name")).sendKeys("locked_out_user");
+		d.findElement(By.id("password")).sendKeys("secret_sauce");
+		d.findElement(By.id("login-button")).click();
+		Thread.sleep(20000);
+	String Actualerror=d.findElement(By.xpath("//h3[@data-test='error']")).getText();
+		String expectedtext="Epic sadface: Sorry, this user has been locked out.";
+		Assert.assertEquals(Actualerror, expectedtext, "user is locked");
+	}
+
+}
 
