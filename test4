@@ -1,1 +1,43 @@
+import java.awt.Desktop.Action;
+import java.sql.Driver;
+import java.time.Duration;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+
+import net.bytebuddy.agent.builder.AgentBuilder.RedefinitionStrategy.DiscoveryStrategy.Explicit;
+
+public class testcase4 {
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+		WebDriver d=new ChromeDriver();
+		d.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		d.get("https://www.saucedemo.com/");
+		
+		d.findElement(By.id("user-name")).sendKeys("standard_user");
+		d.findElement(By.id("password")).sendKeys("secret_sauce");
+		d.findElement(By.id("login-button")).click();
+		Thread.sleep(20000);
+		d.findElement(By.xpath("//button[@id='add-to-cart-sauce-labs-backpack']")).click();
+		d.findElement(By.xpath("//button[@id='add-to-cart-sauce-labs-bike-light']")).click();
+		d.findElement(By.xpath("//button[@id='checkout']")).click();
+		d.findElement(By.xpath("//input[@id='first-name']")).sendKeys("balram");
+		d.findElement(By.xpath("//input[@id='last-name']")).sendKeys("Chaudhary");
+		d.findElement(By.xpath("//input[@id='postal-code']")).sendKeys("100034");
+		d.findElement(By.xpath("//input[@id='continue']")).click();
+		Actions act=new Actions(d);
+		act.sendKeys(Keys.END).build().perform();
+		String total=d.findElement(By.xpath("//div[@class='summary_total_label']")).getText();
+		String etotal="43.18";
+		Assert.assertEquals(total,etotal, "total price is correct");
+		d.findElement(By.xpath("//button[@id='finish']")).click();
+		String confirm=d.findElement(By.xpath("//h2[normalize-space()='Thank you for your order!']")).getText();
+String actual="Thank you for your order!";
+Assert.assertEquals(confirm,actual, "confimatin page comes");
+	}
+}
