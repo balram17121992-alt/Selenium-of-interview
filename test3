@@ -1,1 +1,39 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+
+public class testcase3 {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		WebDriver d=new ChromeDriver();
+		d.get("https://www.saucedemo.com/");
+		d.findElement(By.id("user-name")).sendKeys("standard_user");
+		d.findElement(By.id("password")).sendKeys("secret_sauce");
+		d.findElement(By.id("login-button")).click();
+		Thread.sleep(20000);
+		d.findElement(By.xpath("//button[@id='add-to-cart-sauce-labs-backpack']")).click();
+		d.findElement(By.xpath("//button[@id='add-to-cart-sauce-labs-bike-light']")).click();
+		String actualtext=d.findElement(By.xpath("//span[@class='shopping_cart_badge']")).getText();
+		String expceted="2";
+		Assert.assertEquals(actualtext, expceted, "cart count is correct displaying");
+		String actualproduct1=d.findElement(By.xpath("//div[normalize-space()='Sauce Labs Bike Light']")).getText();
+		String expcetedproduct1="Sauce Labs Bike Light";
+		Assert.assertEquals(actualproduct1, expcetedproduct1, "correct product1");
+		String actualpricep1=d.findElement(By.xpath("//body[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]")).getText();
+		String expcetedprice1="9.99";
+		Assert.assertEquals(actualpricep1,expcetedprice1, "price is correct of product1");
+		String actualproduct2=d.findElement(By.xpath("//div[normalize-space()='Sauce Labs Backpack']")).getText();
+		String expcetedproduct2="Sauce Labs Backpack";
+		Assert.assertEquals(actualproduct2, expcetedproduct2, "correct product2");
+		String actualpricep2=d.findElement(By.xpath("//body[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[4]/div[2]/div[2]/div[1]")).getText();
+		String expcetedprice2="$29.99";
+		Assert.assertEquals(actualpricep2,expcetedprice2, "price is correct of product2");
+
+
+
+	}
+
+}
 
