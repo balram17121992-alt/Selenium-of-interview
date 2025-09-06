@@ -1,0 +1,13 @@
+Covered Tesing
+Login with userid-standard_user 
+password-secret_sauce
+Added 2 items 
+Checkout
+Fill customer details
+Verify total amount 
+confirm order
+Confirm "Checkout: Complete!" and return Home
+ Required
+Java installed 
+ Eclipse IDE with TestNG plugin
+ Chrome browser , ChromeDriver installed
